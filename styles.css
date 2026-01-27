@@ -389,6 +389,111 @@ img {
     line-height: 1.7;
 }
 
+/* ===== Gallery Section ===== */
+.gallery {
+    padding: 100px 0;
+    background-color: var(--gray-100);
+}
+
+.gallery-carousel {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.carousel-container {
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-900);
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn svg {
+    width: 24px;
+    height: 24px;
+    color: var(--gray-900);
+}
+
+.carousel-btn-prev {
+    left: -25px;
+}
+
+.carousel-btn-next {
+    right: -25px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--gray-400);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background-color: var(--gray-500);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background-color: var(--primary);
+    width: 32px;
+    border-radius: 6px;
+}
+
 /* ===== About Section ===== */
 .about {
     padding: 100px 0;
@@ -932,6 +1037,23 @@ img {
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .carousel-btn-prev {
+        left: 10px;
+    }
+
+    .carousel-btn-next {
+        right: 10px;
+    }
+
+    .carousel-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .carousel-slide img {
+        max-height: 500px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1003,6 +1125,61 @@ img {
         padding: 30px;
     }
 
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-btn-prev {
+        left: 5px;
+    }
+
+    .carousel-btn-next {
+        right: 5px;
+    }
+
+    .carousel-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .carousel-slide img {
+        max-height: 400px;
+    }
+
+    .carousel-dots {
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .carousel-dot.active {
+        width: 24px;
+    }
+
+    .warranty-badge {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .warranty-badge svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1024,5 +1201,31 @@ img {
 
     .stat-number {
         font-size: 36px;
+    }
+
+    .carousel-slide img {
+        max-height: 350px;
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .carousel-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+    }
+
+    .warranty-badge strong {
+        font-size: 16px;
+    }
+
+    .warranty-badge p {
+        font-size: 13px;
     }
 }

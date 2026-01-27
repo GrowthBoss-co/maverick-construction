@@ -244,3 +244,196 @@ activeLinkStyle.textContent = `
     }
 `;
 document.head.appendChild(activeLinkStyle);
+
+// ===== Gallery Carousel =====
+class Carousel {
+    constructor() {
+        this.track = document.querySelector('.carousel-track');
+        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        this.nextBtn = document.querySelector('.carousel-btn-next');
+        this.prevBtn = document.querySelector('.carousel-btn-prev');
+        this.dotsContainer = document.querySelector('.carousel-dots');
+
+        if (!this.track) return;
+
+        this.currentIndex = 0;
+        this.slidesPerView = this.getSlidesPerView();
+        this.totalSlides = this.slides.length;
+
+        this.init();
+    }
+
+    getSlidesPerView() {
+        // Responsive slides per view
+        if (window.innerWidth < 768) return 1;
+        if (window.innerWidth < 1024) return 1;
+        return 1;
+    }
+
+    init() {
+        // Create dots
+        this.createDots();
+
+        // Event listeners
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+
+        // Touch/swipe support
+        this.addTouchSupport();
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+
+        // Auto-play (optional)
+        this.startAutoPlay();
+
+        // Update on resize
+        window.addEventListener('resize', () => {
+            this.slidesPerView = this.getSlidesPerView();
+            this.updateCarousel();
+        });
+    }
+
+    createDots() {
+        this.slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            if (index === 0) dot.classList.add('active');
+
+            dot.addEventListener('click', () => {
+                this.currentIndex = index;
+                this.updateCarousel();
+            });
+
+            this.dotsContainer.appendChild(dot);
+        });
+
+        this.dots = Array.from(this.dotsContainer.querySelectorAll('.carousel-dot'));
+    }
+
+    updateCarousel() {
+        const slideWidth = this.slides[0].offsetWidth;
+        this.track.style.transform = `translateX(-${this.currentIndex * slideWidth}px)`;
+
+        // Update dots
+        this.dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentIndex);
+        });
+
+        // Update button states
+        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.5' : '1';
+        this.prevBtn.style.pointerEvents = this.currentIndex === 0 ? 'none' : 'auto';
+
+        this.nextBtn.style.opacity = this.currentIndex === this.totalSlides - 1 ? '0.5' : '1';
+        this.nextBtn.style.pointerEvents = this.currentIndex === this.totalSlides - 1 ? 'none' : 'auto';
+    }
+
+    nextSlide() {
+        if (this.currentIndex < this.totalSlides - 1) {
+            this.currentIndex++;
+            this.updateCarousel();
+            this.resetAutoPlay();
+        }
+    }
+
+    prevSlide() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            this.updateCarousel();
+            this.resetAutoPlay();
+        }
+    }
+
+    addTouchSupport() {
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        this.track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        this.track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+        });
+
+        this.track.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const diff = startX - currentX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+        });
+
+        // Mouse drag support for desktop
+        this.track.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            this.track.style.cursor = 'grabbing';
+        });
+
+        this.track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX;
+        });
+
+        this.track.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            this.track.style.cursor = 'grab';
+
+            const diff = startX - currentX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+        });
+
+        this.track.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                this.track.style.cursor = 'grab';
+            }
+        });
+
+        this.track.style.cursor = 'grab';
+    }
+
+    startAutoPlay() {
+        this.autoPlayInterval = setInterval(() => {
+            if (this.currentIndex < this.totalSlides - 1) {
+                this.nextSlide();
+            } else {
+                this.currentIndex = 0;
+                this.updateCarousel();
+            }
+        }, 5000); // Change slide every 5 seconds
+    }
+
+    resetAutoPlay() {
+        clearInterval(this.autoPlayInterval);
+        this.startAutoPlay();
+    }
+}
+
+// Initialize carousel when DOM is loaded
+if (document.querySelector('.carousel-track')) {
+    const carousel = new Carousel();
+}
