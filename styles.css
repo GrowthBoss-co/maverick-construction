@@ -197,6 +197,17 @@ img {
     gap: 10px;
 }
 
+.logo-image {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.navbar.scrolled .logo-image {
+    filter: brightness(0.2);
+}
+
 .logo-icon {
     width: 45px;
     height: 45px;
@@ -460,6 +471,38 @@ img {
     margin-top: 8px;
 }
 
+.warranty-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(217, 119, 6, 0.03) 100%);
+    border: 2px solid var(--primary-light);
+    border-radius: 12px;
+    margin: 30px 0;
+}
+
+.warranty-badge svg {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--primary);
+}
+
+.warranty-badge strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.warranty-badge p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin: 0;
+}
+
 /* ===== Why Us Section ===== */
 .why-us {
     padding: 100px 0;
@@ -653,6 +696,24 @@ img {
     margin-bottom: 35px;
 }
 
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-outline-white {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-outline-white:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
 /* ===== Contact Section ===== */
 .contact {
     padding: 100px 0;
@@ -786,6 +847,12 @@ img {
 .footer-brand p {
     color: var(--gray-500);
     line-height: 1.8;
+}
+
+.footer-contact .hours {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .footer-links h4,
