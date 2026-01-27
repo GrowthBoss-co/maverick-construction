@@ -109,7 +109,7 @@ function showNotification(message, type = 'success') {
         bottom: 20px;
         right: 20px;
         padding: 16px 24px;
-        background-color: ${type === 'success' ? '#10b981' : '#ef4444'};
+        background-color: ${type === 'success' ? '#1d2645' : '#ef4444'};
         color: white;
         border-radius: 8px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -240,7 +240,7 @@ window.addEventListener('scroll', () => {
 const activeLinkStyle = document.createElement('style');
 activeLinkStyle.textContent = `
     .nav-menu a.active {
-        color: #d97706 !important;
+        color: #d3ba78 !important;
     }
 `;
 document.head.appendChild(activeLinkStyle);
