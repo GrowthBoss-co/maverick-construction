@@ -614,21 +614,39 @@ img {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .feature {
     text-align: center;
-    padding: 30px 20px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.feature:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
 }
 
 .feature-icon {
     font-family: var(--font-heading);
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 800;
     color: var(--primary);
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.feature-icon svg {
+    width: 64px;
+    height: 64px;
 }
 
 .feature h3 {
