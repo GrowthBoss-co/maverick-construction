@@ -524,14 +524,10 @@ img {
 }
 
 .image-placeholder {
-    aspect-ratio: 4/5;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--white);
 }
 
 .image-placeholder span {
@@ -544,6 +540,12 @@ img {
 .image-placeholder p {
     font-size: 18px;
     margin-top: 10px;
+}
+
+.about-logo {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
 }
 
 .about-content .section-tag {
