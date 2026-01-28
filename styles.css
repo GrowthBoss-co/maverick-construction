@@ -395,10 +395,12 @@ img {
     justify-content: center;
 }
 
-.service-icon svg {
+.service-icon svg,
+.service-icon img {
     width: 36px;
     height: 36px;
     color: var(--white);
+    filter: brightness(0) invert(1);
 }
 
 .service-card h3 {
