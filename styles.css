@@ -271,6 +271,15 @@ img {
     transition: var(--transition);
 }
 
+.nav-toggle.active span {
+    background-color: var(--dark);
+}
+
+.nav-toggle.active {
+    position: relative;
+    z-index: 1001;
+}
+
 /* ===== Hero Section ===== */
 .hero {
     position: relative;
@@ -1136,8 +1145,8 @@ img {
     }
 
     .logo-image {
-        height: 60px;
-        max-width: 250px;
+        height: 80px;
+        max-width: 300px;
     }
 
     .logo-text {
